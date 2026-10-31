@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Interpreter vs Compiler Profiler</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="eyebrow">PS-02 | MINI LANGUAGE PROJECT</div>
+
+    <h1>Interpreter vs Compiler Profiler</h1>
+
+    <p>
+        Run one program through two execution paths
+        and compare their phases.
+    </p>
+</header>
+
+<main>
+
+    <section class="panel">
+
+        <div class="section-heading">
+
+            <h2>01. Your Program</h2>
+
+            <select id="sampleSelect">
+
+                <option value="sum">
+                    Sum using a loop
+                </option>
+
+                <option value="condition">
+                    Conditional example
+                </option>
+
+                <option value="math">
+                    Arithmetic example
+                </option>
+
+            </select>
+
+        </div>
+
+        <textarea id="source" spellcheck="false">let x = 5;
+let total = 0;
+
+while (x > 0) {
+    total = total + x;
+    x = x - 1;
+}
+
+if (total == 15) {
+    print "Correct!";
+} else {
+    print "Try again";
+}
+
+print total;</textarea>
+
+        <div class="editor-footer">
+
+            <span>End statements with a semicolon.</span>
+
+            <button id="runButton">
+                Run Comparison
+            </button>
+
+        </div>
+
+        <div id="error" class="error" hidden></div>
+
+    </section>
+
+
+    <section id="results" hidden>
+
+        <div class="section-heading">
+
+            <h2>02. Comparison Results</h2>
+
+            <span id="correctness" class="status"></span>
+
+        </div>
+
+
+        <div class="summary-grid">
+
+            <article class="metric">
+
+                <span>Interpreter Total</span>
+
+                <strong id="interpreterTotal">—</strong>
+
+                <small>Milliseconds</small>
+
+            </article>
+
+
+            <article class="metric">
+
+                <span>Compiler Path Total</span>
+
+                <strong id="compilerTotal">—</strong>
+
+                <small>Milliseconds</small>
+
+            </article>
+
+
+            <article class="metric">
+
+                <span>Bytecode Instructions</span>
+
+                <strong id="instructionCount">—</strong>
+
+                <small>Generated instructions</small>
+
+            </article>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h2>Phase-wise Timing</h2>
+
+            <p class="muted">
+                Translation is not required in direct interpretation.
+            </p>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Phase</th>
+                            <th>Interpreter (ms)</th>
+                            <th>Compiler + VM (ms)</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="timingRows"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="two-columns">
+
+            <article class="panel">
+
+                <h2>Interpreter Output</h2>
+
+                <pre id="interpreterOutput"></pre>
+
+                <h3>Final Variables</h3>
+
+                <pre id="interpreterVariables"></pre>
+
+            </article>
+
+
+            <article class="panel">
+
+                <h2>Compiler + VM Output</h2>
+
+                <pre id="compilerOutput"></pre>
+
+                <h3>Final Variables</h3>
+
+                <pre id="compilerVariables"></pre>
+
+            </article>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h2>Generated Intermediate Instructions</h2>
+
+            <pre id="bytecode"></pre>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h2>Performance Explanation</h2>
+
+            <p id="explanation"></p>
+
+            <p class="muted">
+                Timings may fluctuate for small programs because
+                timer and system overhead can be significant.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    Educational Profiler | Python + Flask
+</footer>
+
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
